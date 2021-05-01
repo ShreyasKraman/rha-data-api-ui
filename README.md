@@ -1,7 +1,7 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://robinhoodarmy.com/">
-    <img alt="RobinhoodArmy" src="https://www.robinhoodarmy.com/assets/RHALogo/RHALogoFinal.png" width="60" />
+    <img alt="RobinhoodArmy" src="https://robinhoodarmy.com/assets/RHALogo/RHALogoFinal.png" width="60" />
   </a>
 </p>
 <h1 align="center">
