@@ -16,7 +16,8 @@
 
     ```shell
     cd rha-data-api-ui/
-    gatsby develop
+    npm install
+    npm run start
     ```
 
 1.  **Open the source code and start editing!**
