@@ -1,5 +1,10 @@
-import React from "react"
+import React from "react";
+import Container from '@material-ui/core/Container'
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+    <Container maxWidth="sm">
+      
+    </Container>
+  );
 }
