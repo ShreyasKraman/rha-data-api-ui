@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container'
-import CreateAccount from '../../components/account/createAccount/createAccount';
+import CreateAccount from '../../components/Account/CreateAccount/createAccount';
 
 const LoginPage = () => {
 
