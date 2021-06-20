@@ -18,6 +18,7 @@ export default {
                     cb(response);
                 }catch(e){
                     console.log(e);
+                    cb(e);
                 }
             }
         }

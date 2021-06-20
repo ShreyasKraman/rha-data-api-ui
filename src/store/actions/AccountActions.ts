@@ -9,9 +9,16 @@ const loginToAccount = (data:AccountAPIDataResponse) => ({
     data
 })
 
+const loginError = () => ({
+    type: types.LOGIN_ERROR,
+})
+
 export const login = (username:string,password:string, dispatch: Dispatch) => {
-    console.log('received in login',[username,password]);
+    console.log('in here');
     account.login(username,password, (response: AccountApiResponse) => {
-        dispatch(loginToAccount(response.data));
+        if(response.data)
+            dispatch(loginToAccount(response.data));
+        else
+            dispatch(loginError())
     });
 }
