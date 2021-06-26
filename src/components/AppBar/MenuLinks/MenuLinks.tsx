@@ -31,21 +31,21 @@ const MenuLinks = (props:MenuLinksInterface) => {
         {props.data ? 
             props.data.token ?
                 <> 
-                <IconButton aria-controls='simple-menu' color="inherit" aria-label="avatar" onClick={handleClick}>
-                    <Avatar className={classes[props.data.avatarColor]}>{props.data.token[0].toUpperCase()}</Avatar> 
-                </IconButton>
-                <Menu
-                    id="simple-menu"
-                    anchorEl={props.anchorEl}
-                    keepMounted
-                    open={Boolean(props.anchorEl)}
-                    onClose={props.handleClose}
-                >
-                    <MenuItem onClick={()=>props.handleClose()}>Profile</MenuItem>
-                    <MenuItem onClick={()=>props.handleClose()}>My account</MenuItem>
-                    <MenuItem onClick={()=>props.handleClose(LOGOUT)}>Logout</MenuItem>
-                </Menu>
-            </>
+                    <IconButton className={classes.avatarButton} aria-controls='simple-menu' color="inherit" aria-label="avatar" onClick={props.handleClick}>
+                        <Avatar className={classes[props.data.avatarColor]}>{props.data.token[0].toUpperCase()}</Avatar> 
+                    </IconButton>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={props.anchorEl}
+                        keepMounted
+                        open={Boolean(props.anchorEl)}
+                        onClose={props.handleClose}
+                    >
+                        <MenuItem onClick={()=>props.handleClose()}>Profile</MenuItem>
+                        <MenuItem onClick={()=>props.handleClose()}>My account</MenuItem>
+                        <MenuItem onClick={()=>props.handleClose(LOGOUT)}>Logout</MenuItem>
+                    </Menu>
+                </>
                 : '' 
             : ''
         }

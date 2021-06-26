@@ -6,7 +6,7 @@ import LoginContainer from '../container/Account/LoginContainer';
 import Layout from '../container/Layout/Layout';
 
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
-import DashboardContainer from '../components/Dashboard/dashboard';
+import DashboardContainer from '../container/Dashboard/Dashboard';
 
 import {AccountState} from '../types/types';
 

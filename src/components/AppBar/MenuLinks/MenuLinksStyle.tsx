@@ -12,6 +12,9 @@ export const useStyles = makeStyles((theme: Theme) =>
               color: '#fff',
               marginRight: theme.spacing(2)
             },
+            avatarButton:{
+              padding:'0'
+            },
             deepOrange: {
                 color: theme.palette.getContrastText(deepOrange[500]),
                 backgroundColor: deepOrange[500],
