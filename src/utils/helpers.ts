@@ -76,6 +76,13 @@ export const deepClone = (fields:IValues) => {
 
 }
 
+/**
+ * A function which returns validated message for a field
+ * @param validation A object with list of validation rules
+ * @param values A object with values of fields
+ * @param fieldName A string fieldname which needs to be validated
+ * @returns A string value which has either validated message or empty string
+ */
 export const getValidationMessage = (validation:IValidation, values: IValues, fieldName: string) : string => {
     const rules: Array<Rules> = validation.rule;
     let message: string = ''
@@ -94,4 +101,13 @@ export const getValidationMessage = (validation:IValidation, values: IValues, fi
         }
     }
     return '';
+}
+
+/**
+ * A function which chooses random color from array of colors
+ * @returns a string value containing color
+ */
+export const getColor = () => {
+    const bgColor = ['brown', 'cyan', 'deepOrange', 'deepPurple', 'indigo', 'lime', 'orange', 'pink', 'purple', 'red', 'yellow'];
+    return bgColor[Math.floor(Math.random()*bgColor.length)];
 }

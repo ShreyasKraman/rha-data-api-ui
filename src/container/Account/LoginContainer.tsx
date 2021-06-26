@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 import { Dispatch } from 'redux';
 
-import {login} from '../../store/actions/AccountActions'
+import {checkLogin, login} from '../../store/actions/AccountActions'
 import {AccountState,IFields, IValues, IErrors, IFormState} from '../../types/types'
 
 import Container from '@material-ui/core/Container'
@@ -16,9 +16,11 @@ import {LoginFields} from '../../constants/FormFields';
 import {useStyles} from './LoginContainerStyles';
 
 import {deepClone, getValidationMessage, required} from '../../utils/helpers'
+import { navigate } from 'gatsby';
 
 interface Props extends AccountState {
     accountLogin: (username:string,password:string) => void
+    checkLogin : () => void
 }
 
 const LoginContainer = (props: Props) => {
@@ -31,8 +33,15 @@ const LoginContainer = (props: Props) => {
     useEffect(()=>{
         if(props.data || props.error){
             setLoader(false);
+            if(props.data && props.data.isAuthUser){
+                navigate('/dashboard')
+            }
         }
     },[props.data,props.error]);
+
+    useEffect(()=>{
+        props.checkLogin()
+    },[!props.data])
 
     const onInputHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -107,7 +116,8 @@ const mapStateToProps = (state:{ account:AccountState }) => ({
 
 const mapDispatchToProps = (dispatch : Dispatch) => {
     return {
-        accountLogin: (username:string, password:string) => login(username, password, dispatch)
+        accountLogin: (username:string, password:string) => login(username, password, dispatch),
+        checkLogin: () => checkLogin(dispatch)
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

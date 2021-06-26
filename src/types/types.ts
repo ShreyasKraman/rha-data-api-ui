@@ -9,6 +9,8 @@ export interface Error{
 
 export interface AccountAPIDataResponse{
     token: string;
+    isAuthUser: boolean;
+    avatarColor: string
 }
 
 export interface AccountApiResponse{

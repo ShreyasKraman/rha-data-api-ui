@@ -1,20 +1,26 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Avatar from '@material-ui/core/Avatar';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import {Link} from 'gatsby'
 
 import {AccountState} from '../../types/types';
 
 import {useStyles} from './MenuBarStyle';
+import { logout } from '../../store/actions/AccountActions';
+import {LOGOUT} from '../../constants/ActionTypes';
 
-const Menubar = (props : AccountState) => {
+import MenuLinks from './MenuLinks/MenuLinks';
+
+interface AppBarInterface extends AccountState {
+    logoutFromAccount: () => void
+}
+
+const Menubar = (props : AppBarInterface) => {
 
     const classes = useStyles();
 
@@ -24,41 +30,35 @@ const Menubar = (props : AccountState) => {
         setAnchorEl(event.currentTarget);
     };
     
-    const handleClose = () => {
-      setAnchorEl(null);
+    const handleClose = (id?:string) => {
+        switch(id){
+            case LOGOUT: 
+                props.logoutFromAccount();
+                break;
+            default: break;
+        }
+        setAnchorEl(null);
     };
 
     return (
         <AppBar className={classes.root} position="static" style={{marginBottom:'2rem'}}>
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
+                <div className={classes.sectionMobile}>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                </div>
                 <Typography className={classes.title} variant="h6">
-                    <Link style={{textDecoration:'none', color:'#fff' }} to='/'>Robinhood API</Link>
+                    <Link style={{textDecoration:'none', color:'#fff' }} to='/'>Robinhood Analytics</Link>
                 </Typography>
-                {!props.data && <Link style={{textDecoration:'none', color:'#fff' }} to='/'>LOGIN</Link>}
-                {props.data ? 
-                    props.data.token ?
-                        <> 
-                        <IconButton aria-controls='simple-menu' color="inherit" aria-label="avatar" onClick={handleClick}>
-                            <Avatar className={classes[props.data.avatarColor]}>{props.data.token[0].toUpperCase()}</Avatar> 
-                        </IconButton>
-                        <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                        </Menu>
-                      </>
-                        : '' 
-                    : ''
-                }
+                <div className={classes.sectionDesktop}>
+                    <MenuLinks
+                        anchorEl={anchorEl}
+                        data={props.data}
+                        handleClick={handleClick}
+                        handleClose={handleClose}
+                    />
+                </div>
             </Toolbar>
         </AppBar>
     )
@@ -69,4 +69,8 @@ const mapStateToProps = (state:{ account:AccountState }) => ({
     data: state.account ? state.account.data : '',
 });
 
-export default connect(mapStateToProps)(Menubar);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    logoutFromAccount: () => logout(dispatch)
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Menubar);
